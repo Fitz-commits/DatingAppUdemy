@@ -33,7 +33,8 @@ import { SharedModule } from './_modules/shared.module';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
     
   ],
   providers: [],
