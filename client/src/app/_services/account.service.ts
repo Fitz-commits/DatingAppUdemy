@@ -4,6 +4,7 @@ import { ReplaySubject } from 'rxjs';
 import {map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/users';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,8 +22,7 @@ export class AccountService {
       map((response: any) => {
         const user: User = response;
         if (user){
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
+          this.setCurrentUser(user);
         }
         return user;
       })
@@ -34,15 +34,15 @@ export class AccountService {
     .pipe(
       map((user: User) => {
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
+          this.setCurrentUser(user);
         }
       })
     );
   }
 
   setCurrentUser(user: User) {
-    this.currentUserSource.next(user);
+    localStorage.setItem('user', JSON.stringify(user));
+        this.currentUserSource.next(user);
   }
 
 
